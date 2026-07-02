@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalFooter basic test 1`] = `
+<div
+  className="sdc-modal__footer"
+>
+  <div>
+    <button
+      className="sdc-button sdc-button__primary   "
+      data-test-id={undefined}
+      disabled={false}
+      onClick={undefined}
+    >
+      Ok
+    </button>
+  </div>
+</div>
+`;
