@@ -67,3 +67,12 @@ describe('RadioGroup', () => {
 		expect(radio.instance().getValue()).toEqual('2');
 	});
 });
+
+describe('RadioGroup - ARIA', () => {
+	test('the group is a radiogroup named by its title', () => {
+		const group = mount(<RadioGroup name='grp1' title='Group A' value='1' options={[{value: '1', label: 'option 1'}]} />);
+		const root = group.find('.sdc-radio-group');
+		expect(root.prop('role')).toBe('radiogroup');
+		expect(group.find(`#${root.prop('aria-labelledby')}`).text()).toBe('Group A');
+	});
+});

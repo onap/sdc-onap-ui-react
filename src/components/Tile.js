@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TileInfo from './TileInfo.js';
 import TileFooter from './TileFooter.js';
 import SVGIcon from './SVGIcon.js';
+import { keyboardClick } from '../utils/keyboardClick.js';
 
 const Tile = ({
     headerText,
@@ -12,13 +13,18 @@ const Tile = ({
     className,
     onClick,
     children,
-    dataTestId
+    dataTestId,
+    ariaLabel
 }) => {
     let childrenArr = Children.toArray(children);
     return (
         <div
             className={`sdc-tile ${className || ''}`}
             onClick={onClick}
+            role={onClick ? 'button' : undefined}
+            tabIndex={onClick ? 0 : undefined}
+            aria-label={onClick ? ariaLabel : undefined}
+            onKeyDown={onClick ? keyboardClick(onClick) : undefined}
             data-test-id={dataTestId}>
             <div className={`sdc-tile-header ${headerColor || ''}`}>
                 {headerText}
@@ -48,7 +54,8 @@ Tile.propTypes = {
     iconColor: PropTypes.string,
     className: PropTypes.string,
     onClick: PropTypes.func,
-    dataTestId: PropTypes.string
+    dataTestId: PropTypes.string,
+    ariaLabel: PropTypes.string
 };
 
 export default Tile;

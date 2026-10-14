@@ -94,6 +94,7 @@ exports[`Button Button - Link - Primary - With Icon 1`] = `
   onClick={undefined}
 >
   <div
+    aria-hidden={undefined}
     className="svg-icon-wrapper     right"
     disabled={undefined}
     onClick={undefined}

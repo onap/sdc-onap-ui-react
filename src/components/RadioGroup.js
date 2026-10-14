@@ -10,12 +10,17 @@ class RadioGroup extends React.Component {
     render() {
         let { name, disabled, title, options, value, className } = this.props;
         let dataTestId = this.props['data-test-id'];
+        let legendId = `${name}-legend`;
         return (
             <div
                 data-test-id={dataTestId}
+                role="radiogroup"
+                aria-labelledby={title ? legendId : undefined}
                 className={`sdc-radio-group ${className || ''}`}>
                 {title && (
-                    <label className="sdc-radio-group__legend">{title}</label>
+                    <label className="sdc-radio-group__legend" id={legendId}>
+                        {title}
+                    </label>
                 )}
                 <div className="sdc-radio-group__radios">
                     {options.map(option => {

@@ -15,7 +15,75 @@ export const modalSize = {
     extraSmall: 'xsm'
 };
 
+let nextId = 0;
+
 class Modal extends React.Component {
+    constructor(props) {
+        super(props);
+        this.titleId = 'sdc-modal-title-' + nextId++;
+        this.setDialogRef = this.setDialogRef.bind(this);
+        this.onDocumentKeyDown = event => {
+            if (
+                (event.key === 'Escape' || event.keyCode === 27) &&
+                this.props.show &&
+                this.props.onClose
+            ) {
+                this.props.onClose();
+            }
+        };
+    }
+
+    // Portal renders its subtree after this component's lifecycle methods have run, so the
+    // dialog only exists in the DOM once this ref fires.
+    setDialogRef(el) {
+        this.dialogRef = el;
+        // A child that focused itself while mounting (autoFocus) keeps focus.
+        if (el && !el.contains(document.activeElement)) {
+            el.focus();
+        }
+    }
+
+    getChildContext() {
+        return { sdcModalTitleId: this.titleId };
+    }
+
+    componentWillMount() {
+        if (this.props.show) {
+            this.returnFocusTo = document.activeElement;
+        }
+    }
+
+    componentDidMount() {
+        document.addEventListener('keydown', this.onDocumentKeyDown);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.show && !this.props.show) {
+            this.returnFocusTo = document.activeElement;
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (!this.props.show && prevProps.show) {
+            this.restoreFocus();
+        }
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.onDocumentKeyDown);
+        if (this.props.show) {
+            this.restoreFocus();
+        }
+    }
+
+    restoreFocus() {
+        const target = this.returnFocusTo;
+        this.returnFocusTo = null;
+        if (target && target.focus && document.body.contains(target)) {
+            target.focus();
+        }
+    }
+
     render() {
         const { size, type, children, show } = this.props;
         return (
@@ -28,6 +96,11 @@ class Modal extends React.Component {
                     {show && (
                         <div className={`sdc-modal ${modalSize[size]}`}>
                             <div
+                                ref={this.setDialogRef}
+                                role="dialog"
+                                aria-modal="true"
+                                aria-labelledby={this.titleId}
+                                tabIndex={-1}
                                 className={`sdc-modal__wrapper sdc-modal-type-${type}`}>
                                 {children}
                             </div>
@@ -39,6 +112,10 @@ class Modal extends React.Component {
     }
 }
 
+Modal.childContextTypes = {
+    sdcModalTitleId: PropTypes.string
+};
+
 Modal.defaultProps = {
     show: false,
     size: 'medium',
@@ -49,7 +126,8 @@ Modal.propTypes = {
     show: PropTypes.bool,
     size: PropTypes.string,
     children: PropTypes.node,
-    type: PropTypes.string
+    type: PropTypes.string,
+    onClose: PropTypes.func
 };
 
 Modal.Body = Body;

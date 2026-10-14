@@ -66,3 +66,44 @@ describe('Modal', () => {
 	});
 
 });
+
+describe('Modal - dialog semantics', () => {
+	const dialogOf = modal => new ReactWrapper(modal.instance().modalRef, true).find('.sdc-modal__wrapper');
+
+	test('the wrapper is a modal dialog labelled by its title', () => {
+		const modal = mount(<Modal show>
+			<Modal.Header onClose={() => {}}><Modal.Title>Standard Modal</Modal.Title></Modal.Header>
+			<Modal.Body>body</Modal.Body>
+		</Modal>);
+		const dialog = dialogOf(modal);
+		expect(dialog.prop('role')).toBe('dialog');
+		expect(dialog.prop('aria-modal')).toBe('true');
+		const titleId = dialog.prop('aria-labelledby');
+		expect(document.getElementById(titleId).textContent).toBe('Standard Modal');
+		modal.unmount();
+	});
+
+	test('Escape calls onClose only while shown', () => {
+		const onClose = jest.fn();
+		const modal = mount(<Modal show onClose={onClose}><Modal.Body>body</Modal.Body></Modal>);
+		document.dispatchEvent(new KeyboardEvent('keydown', {key: 'Escape'}));
+		expect(onClose).toHaveBeenCalledTimes(1);
+		modal.setProps({show: false});
+		document.dispatchEvent(new KeyboardEvent('keydown', {key: 'Escape'}));
+		expect(onClose).toHaveBeenCalledTimes(1);
+		modal.unmount();
+	});
+
+	test('focus moves into the dialog on open and back on close', () => {
+		const opener = document.createElement('button');
+		document.body.appendChild(opener);
+		opener.focus();
+		const modal = mount(<Modal show={false}><Modal.Body>body</Modal.Body></Modal>);
+		modal.setProps({show: true});
+		expect(document.activeElement.getAttribute('role')).toBe('dialog');
+		modal.setProps({show: false});
+		expect(document.activeElement).toBe(opener);
+		modal.unmount();
+		document.body.removeChild(opener);
+	});
+});

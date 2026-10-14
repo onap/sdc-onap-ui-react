@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SVGIcon from './SVGIcon.js';
+import { keyboardClick } from '../utils/keyboardClick.js';
+
+let nextId = 0;
 
 class Accordion extends React.Component {
     constructor(props) {
@@ -8,6 +11,9 @@ class Accordion extends React.Component {
         this.state = {
             open: props.defaultExpanded
         };
+        this.bodyId = 'sdc-accordion-body-' + nextId++;
+        this.toggle = () => this.setState({ open: !this.state.open });
+        this.onHeaderKeyDown = keyboardClick(this.toggle);
     }
     render() {
         const { children, title, className, dataTestId } = this.props;
@@ -16,7 +22,12 @@ class Accordion extends React.Component {
             <div className={`sdc-accordion ${className}`}>
                 <div
                     data-test-id={dataTestId}
-                    onClick={() => this.setState({ open: !open })}
+                    role="button"
+                    tabIndex={0}
+                    aria-expanded={open ? 'true' : 'false'}
+                    aria-controls={this.bodyId}
+                    onClick={this.toggle}
+                    onKeyDown={this.onHeaderKeyDown}
                     className="sdc-accordion-header">
                     <SVGIcon
                         name="chevronDown"
@@ -24,7 +35,9 @@ class Accordion extends React.Component {
                     />
                     <div className="title">{title}</div>
                 </div>
-                <div className={`sdc-accordion-body ${open ? 'open' : ''}`}>
+                <div
+                    id={this.bodyId}
+                    className={`sdc-accordion-body ${open ? 'open' : ''}`}>
                     {children}
                 </div>
             </div>
@@ -35,7 +48,7 @@ class Accordion extends React.Component {
 Accordion.propTypes = {
     title: PropTypes.string,
     children: PropTypes.node,
-    expandByDefault: PropTypes.bool,
+    defaultExpanded: PropTypes.bool,
     dataTestId: PropTypes.string
 };
 

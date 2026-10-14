@@ -14,6 +14,7 @@ const Notification = ({
         <div
             className={`sdc-notification type-${type} ${className}`}
             data-test-id={dataTestId}
+            role={type === 'error' || type === 'warning' ? 'alert' : 'status'}
             onClick={onClick}>
             <div className="sdc-notification__icon_container">
                 <SVGIcon name="check" className="sdc-notification_svg-icon" />

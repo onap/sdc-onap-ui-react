@@ -13,35 +13,55 @@ exports[`Tabs Tabs - basic rendering 1`] = `
         role="tablist"
       >
         <li
+          aria-controls="sdc-tabs-0-panel"
+          aria-disabled={undefined}
+          aria-selected="true"
           className="sdc-tab sdc-tab-active "
           data-test-id="1"
           disabled={undefined}
+          id="sdc-tabs-0-tab-0"
           onClick={[Function]}
+          onKeyDown={[Function]}
           role="tab"
+          tabIndex={0}
         >
           tab 1
         </li>
         <li
+          aria-controls={undefined}
+          aria-disabled={undefined}
+          aria-selected="false"
           className="sdc-tab  "
           data-test-id="2"
           disabled={undefined}
+          id="sdc-tabs-0-tab-1"
           onClick={[Function]}
+          onKeyDown={[Function]}
           role="tab"
+          tabIndex={-1}
         >
           tab 2
         </li>
         <li
+          aria-controls={undefined}
+          aria-disabled={undefined}
+          aria-selected="false"
           className="sdc-tab  "
           data-test-id="3"
           disabled={undefined}
+          id="sdc-tabs-0-tab-2"
           onClick={[Function]}
+          onKeyDown={[Function]}
           role="tab"
+          tabIndex={-1}
         >
           tab 3
         </li>
       </ul>
       <div
+        aria-labelledby="sdc-tabs-0-tab-0"
         className="sdc-tab-content"
+        id="sdc-tabs-0-panel"
         role="tabpanel"
       >
         Tab #1

@@ -15,7 +15,7 @@ const headerTypes = {
     custom: 'sdc-custom__header'
 };
 
-const Header = ({ children, onClose, type }) => (
+const Header = ({ children, onClose, type, closeAriaLabel }) => (
     <div className={headerTypes[type] + ' sdc-modal__header'}>
         {type !== 'custom' && (
             <SVGIcon
@@ -30,17 +30,20 @@ const Header = ({ children, onClose, type }) => (
             className="sdc-modal__close-button"
             onClick={onClose}
             name="close"
+            ariaLabel={closeAriaLabel}
         />
     </div>
 );
 
 Header.propTypes = {
     children: PropTypes.node,
-    onClose: PropTypes.func
+    onClose: PropTypes.func,
+    closeAriaLabel: PropTypes.string
 };
 
 Header.defaultProps = {
-    type: 'info'
+    type: 'info',
+    closeAriaLabel: 'Close'
 };
 
 export default Header;

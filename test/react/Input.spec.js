@@ -67,3 +67,20 @@ describe('Input', () => {
 		expect(input.find('input').prop('value')).toEqual('Changed');
 	});
 });
+
+describe('Input - ARIA', () => {
+	test('an error marks the input invalid and describes it', () => {
+		const input = mount(<Input label='label' name='clickme' errorMessage='this is an error' isRequired />);
+		const field = input.find('input');
+		expect(field.prop('aria-invalid')).toBe('true');
+		expect(field.prop('aria-required')).toBe('true');
+		expect(input.find(`#${field.prop('aria-describedby')}`).text()).toBe('this is an error');
+	});
+
+	test('a valid optional input has no error attributes', () => {
+		const field = mount(<Input label='label' name='clickme' />).find('input');
+		expect(field.prop('aria-invalid')).toBeUndefined();
+		expect(field.prop('aria-describedby')).toBeUndefined();
+		expect(field.prop('aria-required')).toBeUndefined();
+	});
+});

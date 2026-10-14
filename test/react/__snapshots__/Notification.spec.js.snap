@@ -5,11 +5,13 @@ exports[`Notification Notification - error 1`] = `
   className="sdc-notification type-error "
   data-test-id=""
   onClick={undefined}
+  role="alert"
 >
   <div
     className="sdc-notification__icon_container"
   >
     <div
+      aria-hidden="true"
       className="svg-icon-wrapper  sdc-notification_svg-icon   bottom"
       disabled={undefined}
       onClick={undefined}
@@ -40,11 +42,13 @@ exports[`Notification Notification - info 1`] = `
   className="sdc-notification type-info "
   data-test-id=""
   onClick={undefined}
+  role="status"
 >
   <div
     className="sdc-notification__icon_container"
   >
     <div
+      aria-hidden="true"
       className="svg-icon-wrapper  sdc-notification_svg-icon   bottom"
       disabled={undefined}
       onClick={undefined}
@@ -75,11 +79,13 @@ exports[`Notification Notification - success 1`] = `
   className="sdc-notification type-success "
   data-test-id=""
   onClick={undefined}
+  role="status"
 >
   <div
     className="sdc-notification__icon_container"
   >
     <div
+      aria-hidden="true"
       className="svg-icon-wrapper  sdc-notification_svg-icon   bottom"
       disabled={undefined}
       onClick={undefined}
@@ -110,11 +116,13 @@ exports[`Notification Notification - warning 1`] = `
   className="sdc-notification type-warning "
   data-test-id=""
   onClick={undefined}
+  role="alert"
 >
   <div
     className="sdc-notification__icon_container"
   >
     <div
+      aria-hidden="true"
       className="svg-icon-wrapper  sdc-notification_svg-icon   bottom"
       disabled={undefined}
       onClick={undefined}

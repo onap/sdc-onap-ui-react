@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import iconMap from '../utils/iconMap.js';
+import { keyboardClick } from '../utils/keyboardClick.js';
 
 const SVGIcon = ({
     name,
@@ -13,6 +14,7 @@ const SVGIcon = ({
     labelPosition,
     color,
     disabled,
+    ariaLabel,
     ...other
 }) => {
     let colorClass = color !== '' ? '__' + color : '';
@@ -27,14 +29,30 @@ const SVGIcon = ({
         console.error('Icon by the name ' + camelCasedName + ' is missing.');
     }
 
+    const handleClick = onClick && !disabled ? onClick : undefined;
+    let a11y = { 'aria-hidden': label ? undefined : 'true' };
+    if (onClick) {
+        a11y = {
+            role: 'button',
+            tabIndex: disabled ? -1 : 0,
+            'aria-disabled': disabled ? 'true' : undefined,
+            'aria-label': ariaLabel,
+            onKeyDown: handleClick ? keyboardClick(handleClick) : undefined
+        };
+    }
+
     return (
         <div
+            {...a11y}
             {...other}
-            onClick={onClick}
+            onClick={handleClick}
             className={classes}
             disabled={disabled}>
             {IconComponent && (
-                <IconComponent className={`svg-icon __${name}`} />
+                <IconComponent
+                    className={`svg-icon __${name}`}
+                    aria-hidden="true"
+                />
             )}
             {!IconComponent && (
                 <span className="svg-icon-missing">Missing Icon</span>
@@ -56,7 +74,9 @@ SVGIcon.propTypes = {
     className: PropTypes.string,
     iconClassName: PropTypes.string,
     labelClassName: PropTypes.string,
-    color: PropTypes.string
+    color: PropTypes.string,
+    disabled: PropTypes.bool,
+    ariaLabel: PropTypes.string
 };
 
 SVGIcon.defaultProps = {

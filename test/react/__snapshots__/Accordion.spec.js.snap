@@ -5,11 +5,17 @@ exports[`Accordion Accordion - Default 1`] = `
   className="sdc-accordion "
 >
   <div
+    aria-controls="sdc-accordion-body-0"
+    aria-expanded="false"
     className="sdc-accordion-header"
     data-test-id={undefined}
     onClick={[Function]}
+    onKeyDown={[Function]}
+    role="button"
+    tabIndex={0}
   >
     <div
+      aria-hidden="true"
       className="svg-icon-wrapper     bottom"
       disabled={undefined}
       onClick={undefined}
@@ -25,6 +31,7 @@ exports[`Accordion Accordion - Default 1`] = `
   </div>
   <div
     className="sdc-accordion-body "
+    id="sdc-accordion-body-0"
   >
     Accordion body
   </div>

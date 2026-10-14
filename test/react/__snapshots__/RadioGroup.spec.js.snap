@@ -2,11 +2,14 @@
 
 exports[`RadioGroup RadioGroup - basic rendering 1`] = `
 <div
+  aria-labelledby="grp1-legend"
   className="sdc-radio-group "
   data-test-id="grp1"
+  role="radiogroup"
 >
   <label
     className="sdc-radio-group__legend"
+    id="grp1-legend"
   >
     Group A
   </label>
