@@ -14,6 +14,9 @@ exports[`Input Input - default 1`] = `
     className="sdc-input-wrapper"
   >
     <input
+      aria-describedby={undefined}
+      aria-invalid={undefined}
+      aria-required={undefined}
       className="sdc-input__input  "
       data-test-id={undefined}
       disabled={false}
@@ -45,6 +48,9 @@ exports[`Input Input - error 1`] = `
     className="sdc-input-wrapper"
   >
     <input
+      aria-describedby="clickme-error"
+      aria-invalid="true"
+      aria-required={undefined}
       className="sdc-input__input error "
       data-test-id={undefined}
       disabled={false}
@@ -61,8 +67,10 @@ exports[`Input Input - error 1`] = `
   </div>
   <div
     className="sdc-label__error"
+    id="clickme-error"
   >
     <div
+      aria-hidden={undefined}
       className="svg-icon-wrapper   __negative  right"
       disabled={undefined}
       onClick={undefined}
@@ -92,6 +100,9 @@ exports[`Input Input - number 1`] = `
     className="sdc-input-wrapper"
   >
     <input
+      aria-describedby={undefined}
+      aria-invalid={undefined}
+      aria-required={undefined}
       className="sdc-input__input  "
       data-test-id={undefined}
       disabled={false}
@@ -123,6 +134,9 @@ exports[`Input Input - placeholder 1`] = `
     className="sdc-input-wrapper"
   >
     <input
+      aria-describedby={undefined}
+      aria-invalid={undefined}
+      aria-required={undefined}
       className="sdc-input__input  "
       data-test-id={undefined}
       disabled={false}
@@ -154,6 +168,9 @@ exports[`Input Input - readonly 1`] = `
     className="sdc-input-wrapper"
   >
     <input
+      aria-describedby={undefined}
+      aria-invalid={undefined}
+      aria-required={undefined}
       className="sdc-input__input  view-only"
       data-test-id={undefined}
       disabled={false}
@@ -185,6 +202,9 @@ exports[`Input Input - required 1`] = `
     className="sdc-input-wrapper"
   >
     <input
+      aria-describedby={undefined}
+      aria-invalid={undefined}
+      aria-required={undefined}
       className="sdc-input__input  "
       data-test-id={undefined}
       disabled={false}

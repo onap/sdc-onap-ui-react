@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RadioGroup RadioGroup - basic rendering 1`] = `
-<div
+<fieldset
   className="sdc-radio-group "
   data-test-id="grp1"
 >
-  <label
+  <legend
     className="sdc-radio-group__legend"
   >
     Group A
-  </label>
+  </legend>
   <div
     className="sdc-radio-group__radios"
   >
@@ -56,5 +56,5 @@ exports[`RadioGroup RadioGroup - basic rendering 1`] = `
       </label>
     </div>
   </div>
-</div>
+</fieldset>
 `;

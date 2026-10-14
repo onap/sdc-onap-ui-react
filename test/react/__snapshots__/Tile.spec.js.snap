@@ -4,7 +4,6 @@ exports[`Tile Empty tile 1`] = `
 <div
   className="sdc-tile "
   data-test-id={undefined}
-  onClick={undefined}
 >
   <div
     className="sdc-tile-header "
@@ -23,7 +22,6 @@ exports[`Tile Tile with content info 1`] = `
 <div
   className="sdc-tile "
   data-test-id={undefined}
-  onClick={undefined}
 >
   <div
     className="sdc-tile-header "
@@ -52,7 +50,6 @@ exports[`Tile Tile with footer 1`] = `
 <div
   className="sdc-tile "
   data-test-id={undefined}
-  onClick={undefined}
 >
   <div
     className="sdc-tile-header "
@@ -81,7 +78,6 @@ exports[`Tile Tile with props 1`] = `
 <div
   className="sdc-tile "
   data-test-id={undefined}
-  onClick={undefined}
 >
   <div
     className="sdc-tile-header blue"
@@ -95,6 +91,7 @@ exports[`Tile Tile with props 1`] = `
       className="sdc-tile-content-icon blue"
     >
       <div
+        aria-hidden="true"
         className="svg-icon-wrapper     bottom"
         disabled={undefined}
         onClick={undefined}

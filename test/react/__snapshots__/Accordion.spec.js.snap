@@ -2,29 +2,32 @@
 
 exports[`Accordion Accordion - Default 1`] = `
 <div
-  className="sdc-accordion "
+  className="sdc-accordion"
 >
-  <div
+  <button
+    aria-controls="sdc-accordion-body-0"
+    aria-expanded="false"
     className="sdc-accordion-header"
     data-test-id={undefined}
+    disabled={undefined}
     onClick={[Function]}
+    type="button"
   >
-    <div
-      className="svg-icon-wrapper     bottom"
-      disabled={undefined}
-      onClick={undefined}
+    <span
+      aria-hidden="true"
+      className="svg-icon-wrapper  bottom"
     >
       <svg />
-      
-    </div>
-    <div
+    </span>
+    <span
       className="title"
     >
       Accordion
-    </div>
-  </div>
+    </span>
+  </button>
   <div
     className="sdc-accordion-body "
+    id="sdc-accordion-body-0"
   >
     Accordion body
   </div>

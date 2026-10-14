@@ -67,3 +67,13 @@ describe('RadioGroup', () => {
 		expect(radio.instance().getValue()).toEqual('2');
 	});
 });
+
+describe('RadioGroup - semantics', () => {
+	test('the group is a fieldset named by its legend', () => {
+		const group = mount(<RadioGroup name='grp1' title='Group A' value='1' options={[{value: '1', label: 'option 1'}]} />);
+		const root = group.find('.sdc-radio-group');
+		expect(root.type()).toBe('fieldset');
+		expect(root.prop('role')).toBeUndefined();
+		expect(root.find('legend.sdc-radio-group__legend').text()).toBe('Group A');
+	});
+});

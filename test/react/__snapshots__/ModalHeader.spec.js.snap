@@ -5,6 +5,7 @@ exports[`ModalHeader basic test 1`] = `
   className="sdc-info__header sdc-modal__header"
 >
   <div
+    aria-hidden="true"
     className="svg-icon-wrapper sdc-modal__icon sdc-modal__svg-use   bottom"
     disabled={undefined}
     onClick={undefined}
@@ -13,6 +14,7 @@ exports[`ModalHeader basic test 1`] = `
     
   </div>
   <div
+    aria-hidden="true"
     className="svg-icon-wrapper sdc-modal__close-button-svg sdc-modal__close-button   bottom"
     disabled={undefined}
     onClick={undefined}

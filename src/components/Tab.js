@@ -7,20 +7,36 @@ class Tab extends React.Component {
             tabId,
             title,
             onClick,
+            onKeyDown,
+            tabRef,
+            id,
+            panelId,
             disabled,
             className = ''
         } = this.props;
         const dataTestId = this.props['data-test-id'];
+        const selected = activeTab === tabId;
         return (
             <li
                 className={`sdc-tab ${
-                    activeTab === tabId ? 'sdc-tab-active' : ''
+                    selected ? 'sdc-tab-active' : ''
                 } ${className}`}
-                onClick={disabled ? undefined : onClick}
-                data-test-id={dataTestId}
-                role="tab"
-                disabled={disabled}>
-                {title}
+                role="presentation"
+                data-test-id={dataTestId}>
+                <button
+                    type="button"
+                    className="sdc-tab__button"
+                    role="tab"
+                    ref={tabRef}
+                    id={id}
+                    aria-selected={selected ? 'true' : 'false'}
+                    aria-controls={panelId}
+                    tabIndex={selected ? 0 : -1}
+                    disabled={disabled}
+                    onClick={onClick}
+                    onKeyDown={onKeyDown}>
+                    {title}
+                </button>
             </li>
         );
     }

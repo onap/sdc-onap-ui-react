@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SVGIcon from './SVGIcon.js';
+import iconMap from '../utils/iconMap.js';
+
+let nextId = 0;
 
 class Accordion extends React.Component {
     constructor(props) {
@@ -8,23 +10,41 @@ class Accordion extends React.Component {
         this.state = {
             open: props.defaultExpanded
         };
+        this.bodyId = 'sdc-accordion-body-' + nextId++;
+        this.toggle = () => this.setState({ open: !this.state.open });
     }
     render() {
-        const { children, title, className, dataTestId } = this.props;
+        const { children, title, className, dataTestId, disabled } = this.props;
+        const Chevron = iconMap.chevronDown;
         const { open } = this.state;
         return (
-            <div className={`sdc-accordion ${className}`}>
-                <div
+            <div
+                className={['sdc-accordion', className, disabled && 'disabled']
+                    .filter(Boolean)
+                    .join(' ')}>
+                <button
+                    type="button"
                     data-test-id={dataTestId}
-                    onClick={() => this.setState({ open: !open })}
+                    aria-expanded={open ? 'true' : 'false'}
+                    aria-controls={this.bodyId}
+                    disabled={disabled}
+                    onClick={this.toggle}
                     className="sdc-accordion-header">
-                    <SVGIcon
-                        name="chevronDown"
-                        iconClassName={open ? 'down' : ''}
-                    />
-                    <div className="title">{title}</div>
-                </div>
-                <div className={`sdc-accordion-body ${open ? 'open' : ''}`}>
+                    <span
+                        className={`svg-icon-wrapper ${
+                            open ? 'down' : ''
+                        } bottom`}
+                        aria-hidden="true">
+                        <Chevron
+                            className="svg-icon __chevronDown"
+                            aria-hidden="true"
+                        />
+                    </span>
+                    <span className="title">{title}</span>
+                </button>
+                <div
+                    id={this.bodyId}
+                    className={`sdc-accordion-body ${open ? 'open' : ''}`}>
                     {children}
                 </div>
             </div>
@@ -35,7 +55,8 @@ class Accordion extends React.Component {
 Accordion.propTypes = {
     title: PropTypes.string,
     children: PropTypes.node,
-    expandByDefault: PropTypes.bool,
+    defaultExpanded: PropTypes.bool,
+    disabled: PropTypes.bool,
     dataTestId: PropTypes.string
 };
 

@@ -8,6 +8,7 @@ import back from '-!svg-react-loader!onap-ui-common/lib/icons/back.svg';
 import base from '-!svg-react-loader!onap-ui-common/lib/icons/base.svg';
 import calendar from '-!svg-react-loader!onap-ui-common/lib/icons/calendar.svg';
 import caretDown from '-!svg-react-loader!onap-ui-common/lib/icons/caretDown.svg';
+import chatSmall from '-!svg-react-loader!onap-ui-common/lib/icons/chatSmall.svg';
 import check from '-!svg-react-loader!onap-ui-common/lib/icons/check.svg';
 import checkCircle from '-!svg-react-loader!onap-ui-common/lib/icons/checkCircle.svg';
 import chevronDown from '-!svg-react-loader!onap-ui-common/lib/icons/chevronDown.svg';
@@ -23,6 +24,8 @@ import exclamationTriangleLine from '-!svg-react-loader!onap-ui-common/lib/icons
 import expand from '-!svg-react-loader!onap-ui-common/lib/icons/expand.svg';
 import filter from '-!svg-react-loader!onap-ui-common/lib/icons/filter.svg';
 import infoCircleO from '-!svg-react-loader!onap-ui-common/lib/icons/infoCircleO.svg';
+import infoСircleO from '-!svg-react-loader!onap-ui-common/lib/icons/infoСircleO.svg';
+import location from '-!svg-react-loader!onap-ui-common/lib/icons/location.svg';
 import locked from '-!svg-react-loader!onap-ui-common/lib/icons/locked.svg';
 import module from '-!svg-react-loader!onap-ui-common/lib/icons/module.svg';
 import nestedHeat from '-!svg-react-loader!onap-ui-common/lib/icons/nestedHeat.svg';
@@ -30,6 +33,7 @@ import network from '-!svg-react-loader!onap-ui-common/lib/icons/network.svg';
 import notificationBell from '-!svg-react-loader!onap-ui-common/lib/icons/notificationBell.svg';
 import notificationFullBell from '-!svg-react-loader!onap-ui-common/lib/icons/notificationFullBell.svg';
 import others from '-!svg-react-loader!onap-ui-common/lib/icons/others.svg';
+import pauseUponCompletion from '-!svg-react-loader!onap-ui-common/lib/icons/pauseUponCompletion.svg';
 import pencil from '-!svg-react-loader!onap-ui-common/lib/icons/pencil.svg';
 import plus from '-!svg-react-loader!onap-ui-common/lib/icons/plus.svg';
 import plusCircle from '-!svg-react-loader!onap-ui-common/lib/icons/plusCircle.svg';
@@ -39,6 +43,7 @@ import proceedToOverview from '-!svg-react-loader!onap-ui-common/lib/icons/proce
 import questionMark from '-!svg-react-loader!onap-ui-common/lib/icons/questionMark.svg';
 import search from '-!svg-react-loader!onap-ui-common/lib/icons/search.svg';
 import sliders from '-!svg-react-loader!onap-ui-common/lib/icons/sliders.svg';
+import stoppedUponSuccess from '-!svg-react-loader!onap-ui-common/lib/icons/stoppedUponSuccess.svg';
 import trashO from '-!svg-react-loader!onap-ui-common/lib/icons/trashO.svg';
 import unlocked from '-!svg-react-loader!onap-ui-common/lib/icons/unlocked.svg';
 import upload from '-!svg-react-loader!onap-ui-common/lib/icons/upload.svg';
@@ -70,6 +75,7 @@ export default {
 	base,
 	calendar,
 	caretDown,
+	chatSmall,
 	check,
 	checkCircle,
 	chevronDown,
@@ -85,6 +91,8 @@ export default {
 	expand,
 	filter,
 	infoCircleO,
+	infoСircleO,
+	location,
 	locked,
 	module,
 	nestedHeat,
@@ -92,6 +100,7 @@ export default {
 	notificationBell,
 	notificationFullBell,
 	others,
+	pauseUponCompletion,
 	pencil,
 	plus,
 	plusCircle,
@@ -101,6 +110,7 @@ export default {
 	questionMark,
 	search,
 	sliders,
+	stoppedUponSuccess,
 	trashO,
 	unlocked,
 	upload,

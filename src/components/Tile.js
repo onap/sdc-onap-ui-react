@@ -12,16 +12,26 @@ const Tile = ({
     className,
     onClick,
     children,
-    dataTestId
+    dataTestId,
+    ariaLabel
 }) => {
     let childrenArr = Children.toArray(children);
     return (
         <div
             className={`sdc-tile ${className || ''}`}
-            onClick={onClick}
             data-test-id={dataTestId}>
             <div className={`sdc-tile-header ${headerColor || ''}`}>
-                {headerText}
+                {onClick ? (
+                    <button
+                        type="button"
+                        className="sdc-tile-header-button"
+                        aria-label={ariaLabel}
+                        onClick={onClick}>
+                        {headerText}
+                    </button>
+                ) : (
+                    headerText
+                )}
             </div>
             <div className="sdc-tile-content">
                 <div className={`sdc-tile-content-icon ${iconColor || ''}`}>
@@ -48,7 +58,21 @@ Tile.propTypes = {
     iconColor: PropTypes.string,
     className: PropTypes.string,
     onClick: PropTypes.func,
-    dataTestId: PropTypes.string
+    dataTestId: PropTypes.string,
+    ariaLabel: (props, propName, componentName) => {
+        if (props.onClick && !props.headerText && !props[propName]) {
+            return new Error(
+                `${componentName}: a clickable tile needs headerText or ariaLabel to name its button.`
+            );
+        }
+        if (
+            props[propName] !== undefined &&
+            typeof props[propName] !== 'string'
+        ) {
+            return new Error(`${componentName}: ariaLabel must be a string.`);
+        }
+        return null;
+    }
 };
 
 export default Tile;

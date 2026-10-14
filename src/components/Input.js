@@ -19,6 +19,7 @@ class Input extends React.Component {
         let inputClasses = `sdc-input__input ${errorMessage ? 'error' : ''} ${
             readOnly ? 'view-only' : ''
         }`;
+        let errorId = name ? `${name}-error` : undefined;
         let labelClasses = `sdc-input__label ${readOnly ? 'view-only' : ''} ${
             isRequired ? 'required' : ''
         }`;
@@ -39,13 +40,16 @@ class Input extends React.Component {
                         value={this.props.value}
                         placeholder={placeholder}
                         data-test-id={dataTestId}
+                        aria-invalid={errorMessage ? 'true' : undefined}
+                        aria-describedby={errorMessage ? errorId : undefined}
+                        aria-required={isRequired ? 'true' : undefined}
                         onBlur={e => this.onBlur(e)}
                         onKeyDown={e => this.onKeyDown(e)}
                         onChange={e => this.onChange(e)}
                     />
                 </div>
                 {errorMessage && (
-                    <div className="sdc-label__error">
+                    <div className="sdc-label__error" id={errorId}>
                         <SVGIcon
                             label={errorMessage}
                             labelPosition="right"

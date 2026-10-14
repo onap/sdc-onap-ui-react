@@ -2,9 +2,13 @@ import React from 'react';
 
 class TabPane extends React.Component {
     render() {
-        const { children } = this.props;
+        const { children, id, labelledBy } = this.props;
         return (
-            <div className="sdc-tab-content" role="tabpanel">
+            <div
+                className="sdc-tab-content"
+                role="tabpanel"
+                id={id}
+                aria-labelledby={labelledBy}>
                 {children}
             </div>
         );

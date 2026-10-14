@@ -11,11 +11,11 @@ class RadioGroup extends React.Component {
         let { name, disabled, title, options, value, className } = this.props;
         let dataTestId = this.props['data-test-id'];
         return (
-            <div
+            <fieldset
                 data-test-id={dataTestId}
                 className={`sdc-radio-group ${className || ''}`}>
                 {title && (
-                    <label className="sdc-radio-group__legend">{title}</label>
+                    <legend className="sdc-radio-group__legend">{title}</legend>
                 )}
                 <div className="sdc-radio-group__radios">
                     {options.map(option => {
@@ -37,7 +37,7 @@ class RadioGroup extends React.Component {
                         );
                     })}
                 </div>
-            </div>
+            </fieldset>
         );
     }
 

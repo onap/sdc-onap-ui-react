@@ -15,9 +15,114 @@ export const modalSize = {
     extraSmall: 'xsm'
 };
 
-class Modal extends React.Component {
+let nextId = 0;
+
+// Mounted inside the Portal and only while the modal is shown, so it opens the dialog
+// once the element is in the document: Portal re-renders its subtree only after Modal's
+// own componentDidUpdate. Not rendering it while hidden matters because onap-ui-common's
+// .sdc-modal display rule overrides the browser's display:none for a closed dialog.
+class NativeDialog extends React.Component {
+    constructor(props) {
+        super(props);
+        this.setRef = el => {
+            this.el = el;
+        };
+        // Visibility belongs to the parent's show prop, so Escape only asks it to close.
+        this.onCancel = event => {
+            event.preventDefault();
+            if (this.props.onClose) {
+                this.props.onClose();
+            }
+        };
+        // A browser may close the dialog on Escape despite preventDefault() (no user
+        // activation since the last one); it has to stay open while it is rendered.
+        this.onNativeClose = () => {
+            if (!this.tornDown && document.body.contains(this.el)) {
+                this.open();
+            }
+        };
+    }
+
+    componentDidMount() {
+        this.el.addEventListener('cancel', this.onCancel);
+        this.el.addEventListener('close', this.onNativeClose);
+        this.open();
+        this.syncLabel();
+    }
+
+    componentDidUpdate() {
+        this.syncLabel();
+    }
+
+    componentWillUnmount() {
+        this.teardown();
+    }
+
+    open() {
+        if (this.props.modal) {
+            this.el.showModal();
+        } else {
+            this.el.show();
+        }
+    }
+
+    // Also called by Modal on unmount: Portal removes its node without unmounting this
+    // subtree, and only close() returns focus to the opener.
+    teardown() {
+        if (this.tornDown) {
+            return;
+        }
+        this.tornDown = true;
+        this.el.removeEventListener('cancel', this.onCancel);
+        this.el.removeEventListener('close', this.onNativeClose);
+        if (this.el.open) {
+            this.el.close();
+        }
+    }
+
+    syncLabel() {
+        const { titleId } = this.props;
+        if (this.el.querySelector('#' + titleId)) {
+            this.el.setAttribute('aria-labelledby', titleId);
+        } else {
+            this.el.removeAttribute('aria-labelledby');
+        }
+    }
+
     render() {
-        const { size, type, children, show } = this.props;
+        return (
+            <dialog ref={this.setRef} className={this.props.className}>
+                {this.props.children}
+            </dialog>
+        );
+    }
+}
+
+class Modal extends React.Component {
+    constructor(props) {
+        super(props);
+        this.titleId = 'sdc-modal-title-' + nextId++;
+        this.setNativeDialog = dialog => {
+            this.nativeDialog = dialog;
+        };
+    }
+
+    getChildContext() {
+        return { sdcModalTitleId: this.titleId };
+    }
+
+    get dialogRef() {
+        return this.nativeDialog ? this.nativeDialog.el : null;
+    }
+
+    componentWillUnmount() {
+        if (this.nativeDialog) {
+            this.nativeDialog.teardown();
+        }
+    }
+
+    render() {
+        const { size, type, children, show, onClose, modal } = this.props;
         return (
             <Portal>
                 <div
@@ -26,12 +131,17 @@ class Modal extends React.Component {
                     }}>
                     {show && <div className="modal-background" />}
                     {show && (
-                        <div className={`sdc-modal ${modalSize[size]}`}>
+                        <NativeDialog
+                            ref={this.setNativeDialog}
+                            modal={modal}
+                            onClose={onClose}
+                            titleId={this.titleId}
+                            className={`sdc-modal ${modalSize[size]}`}>
                             <div
                                 className={`sdc-modal__wrapper sdc-modal-type-${type}`}>
                                 {children}
                             </div>
-                        </div>
+                        </NativeDialog>
                     )}
                 </div>
             </Portal>
@@ -39,8 +149,13 @@ class Modal extends React.Component {
     }
 }
 
+Modal.childContextTypes = {
+    sdcModalTitleId: PropTypes.string
+};
+
 Modal.defaultProps = {
     show: false,
+    modal: true,
     size: 'medium',
     type: 'info'
 };
@@ -49,7 +164,9 @@ Modal.propTypes = {
     show: PropTypes.bool,
     size: PropTypes.string,
     children: PropTypes.node,
-    type: PropTypes.string
+    type: PropTypes.string,
+    onClose: PropTypes.func,
+    modal: PropTypes.bool
 };
 
 Modal.Body = Body;

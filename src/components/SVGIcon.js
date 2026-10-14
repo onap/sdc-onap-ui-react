@@ -13,6 +13,7 @@ const SVGIcon = ({
     labelPosition,
     color,
     disabled,
+    ariaLabel,
     ...other
 }) => {
     let colorClass = color !== '' ? '__' + color : '';
@@ -27,14 +28,23 @@ const SVGIcon = ({
         console.error('Icon by the name ' + camelCasedName + ' is missing.');
     }
 
+    const Tag = onClick ? 'button' : 'div';
+    const tagProps = onClick
+        ? { type: 'button', 'aria-label': ariaLabel }
+        : { 'aria-hidden': label ? undefined : 'true' };
+
     return (
-        <div
+        <Tag
+            {...tagProps}
             {...other}
             onClick={onClick}
             className={classes}
             disabled={disabled}>
             {IconComponent && (
-                <IconComponent className={`svg-icon __${name}`} />
+                <IconComponent
+                    className={`svg-icon __${name}`}
+                    aria-hidden="true"
+                />
             )}
             {!IconComponent && (
                 <span className="svg-icon-missing">Missing Icon</span>
@@ -44,7 +54,7 @@ const SVGIcon = ({
                     {label}
                 </span>
             )}
-        </div>
+        </Tag>
     );
 };
 
@@ -56,7 +66,9 @@ SVGIcon.propTypes = {
     className: PropTypes.string,
     iconClassName: PropTypes.string,
     labelClassName: PropTypes.string,
-    color: PropTypes.string
+    color: PropTypes.string,
+    disabled: PropTypes.bool,
+    ariaLabel: PropTypes.string
 };
 
 SVGIcon.defaultProps = {
