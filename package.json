@@ -1,6 +1,6 @@
 {
   "name": "onap-ui-react",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "index.js",
   "description": "This project aims to create a unified UI styled components for multiple development teams who work on the same web-based applications.",
   "scripts": {
