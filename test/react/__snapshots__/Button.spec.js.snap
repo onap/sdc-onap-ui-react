@@ -162,3 +162,45 @@ exports[`Button Button - Outline - Primary 1`] = `
   Click Me
 </button>
 `;
+
+exports[`Button Button - Tertiary - Disabled 1`] = `
+<button
+  className="sdc-button sdc-button__tertiary   "
+  disabled={true}
+  onClick={undefined}
+>
+  Add Property
+</button>
+`;
+
+exports[`Button Button - Tertiary - With Icon 1`] = `
+<button
+  className="sdc-button sdc-button__tertiary   plus"
+  disabled={false}
+  onClick={undefined}
+>
+  <div
+    aria-hidden={undefined}
+    className="svg-icon-wrapper     right"
+    disabled={undefined}
+    onClick={undefined}
+  >
+    <svg />
+    <span
+      className="svg-icon-label "
+    >
+      Add Property
+    </span>
+  </div>
+</button>
+`;
+
+exports[`Button Button - Tertiary 1`] = `
+<button
+  className="sdc-button sdc-button__tertiary   "
+  disabled={false}
+  onClick={undefined}
+>
+  Add Property
+</button>
+`;

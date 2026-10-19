@@ -74,4 +74,28 @@ describe('Button', () => {
 		expect(button).toMatchSnapshot();
 	});
 
+	test('Button - Tertiary', () => {
+		const button = renderer.create(<Button btnType='tertiary'>Add Property</Button>).toJSON();
+		expect(button.props.className.split(/\s+/)).toEqual(expect.arrayContaining(['sdc-button', 'sdc-button__tertiary']));
+		expect(button.children).toEqual(['Add Property']);
+		expect(button).toMatchSnapshot();
+	});
+
+	test('Button - Tertiary - Disabled', () => {
+		const button = renderer.create(<Button btnType='tertiary' disabled>Add Property</Button>).toJSON();
+		expect(button.props.disabled).toBe(true);
+		expect(button).toMatchSnapshot();
+	});
+
+	test('Button - Tertiary - With Icon', () => {
+		const button = renderer.create(<Button btnType='tertiary' iconName='plus'>Add Property</Button>).toJSON();
+		// onap-ui-common's tertiary rules target this wrapper: icon first, then the label.
+		const [wrapper] = button.children;
+		expect(wrapper.props.className.split(/\s+/)).toEqual(expect.arrayContaining(['svg-icon-wrapper', 'right']));
+		expect(wrapper.children.map(c => c.type)).toEqual(['svg', 'span']);
+		expect(wrapper.children[1].props.className.trim()).toBe('svg-icon-label');
+		expect(wrapper.children[1].children).toEqual(['Add Property']);
+		expect(button).toMatchSnapshot();
+	});
+
 });
